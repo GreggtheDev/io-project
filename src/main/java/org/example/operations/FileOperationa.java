@@ -62,3 +62,46 @@ public class FileOperations {
     public static void deleteFile(String filePath) throws IOException {
         Files.delete(Paths.get(filePath));
     }
+
+    /**
+     * Creates a new directory.
+     *
+     * @param directoryPath Path of the directory to create.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static void createDirectory(String directoryPath) throws IOException {
+        Files.createDirectory(Paths.get(directoryPath));
+    }
+
+    /**
+     * Deletes a directory.
+     *
+     * @param directoryPath Path of the directory to delete.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static void deleteDirectory(String directoryPath) throws IOException {
+        Files.delete(Paths.get(directoryPath));
+    }
+
+    /**
+     * Searches for files within a directory based on a search query.
+     *
+     * @param directoryPath Path of the directory to search within.
+     * @param searchQuery   Query to search for (file name or extension).
+     * @return List of matching file paths.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static List<String> searchFiles(String directoryPath, String searchQuery) throws IOException {
+        List<String> results = new ArrayList<>();
+        Files.walkFileTree(Paths.get(directoryPath), new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                if (file.getFileName().toString().contains(searchQuery)) {
+                    results.add(file.toString());
+                }
+                return FileVisitResult.CONTINUE;
+            }
+        });
+        return results;
+    }
+}
