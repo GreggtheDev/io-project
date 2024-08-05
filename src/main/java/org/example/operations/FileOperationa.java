@@ -52,3 +52,13 @@ public class FileOperations {
     public static void moveFile(String sourcePath, String destinationPath) throws IOException {
         Files.move(Paths.get(sourcePath), Paths.get(destinationPath), StandardCopyOption.REPLACE_EXISTING);
     }
+
+    /**
+     * Deletes a file.
+     *
+     * @param filePath Path of the file to delete.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static void deleteFile(String filePath) throws IOException {
+        Files.delete(Paths.get(filePath));
+    }
