@@ -30,3 +30,25 @@ public class FileOperations {
         }
         return contents;
     }
+
+    /**
+     * Copies a file from source to destination.
+     *
+     * @param sourcePath      Path of the source file.
+     * @param destinationPath Path of the destination file.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static void copyFile(String sourcePath, String destinationPath) throws IOException {
+        Files.copy(Paths.get(sourcePath), Paths.get(destinationPath), StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    /**
+     * Moves a file from source to destination.
+     *
+     * @param sourcePath      Path of the source file.
+     * @param destinationPath Path of the destination file.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static void moveFile(String sourcePath, String destinationPath) throws IOException {
+        Files.move(Paths.get(sourcePath), Paths.get(destinationPath), StandardCopyOption.REPLACE_EXISTING);
+    }
